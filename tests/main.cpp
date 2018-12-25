@@ -28,15 +28,35 @@ int WinMain(
 int main(int argc, char const *argv[])
 {
     /* code */
-    ImFont font;
-    std::cout << "apple plataform" << std::endl;
+    glfwInit();
+    GLFWwindow *window;
+    int width = 800;
+    int height = 600;
 
-    while (true)
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+    window = glfwCreateWindow(width, height, APPLICATION_NAME, nullptr, nullptr);
+
+    if (!window)
     {
-        /* code */
+        glfwTerminate();
+        exit(EXIT_FAILURE);
     }
 
-    return 0;
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
+
+    while (!glfwWindowShouldClose(window))
+    {
+        glfwGetFramebufferSize(window, &width, &height);
+        /* code */
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    exit(EXIT_SUCCESS);
 }
 #elif UNIX
 #include <GLFW/glfw3.h>
