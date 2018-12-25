@@ -1,0 +1,15 @@
+#ignore all logs
+**/logs
+*.log
+
+#enviroment paths
+build
+.vscode
+.vs
+_install
+
+#files
+**.exe
+**.dylib
+**.dll
+**.pdb

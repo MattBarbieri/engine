@@ -1,0 +1,35 @@
+set(CURRENT_FILES "")
+
+set(MAJOR_VERSION 0)
+set(MINOR_VERSION 1)
+set(PATCH_VERSION 0)
+list(APPEND CURRENT_FILES main.cpp)
+list(APPEND CURRENT_FILES loadlib.cpp)
+
+set(APPLICATION_NAME "engine")
+add_executable(${APPLICATION_NAME} ${CURRENT_FILES})
+# install(FILES ${Vulkan_INCLUDE_DIRS} DESTINATION extern/include)
+# install(TARGETS ${Vulkan_LIBRARIES} DESTINATION extern/lib)
+
+install(TARGETS ${APPLICATION_NAME}
+RUNTIME DESTINATION bin
+LIBRARY DESTINATION lib
+ARCHIVE DESTINATION lib)
+
+set(ENGINE_NAME "engine name")
+
+target_compile_definitions(${APPLICATION_NAME} PRIVATE
+MAJOR_VERSION=${MAJOR_VERSION}
+MINOR_VERSION=${MINOR_VERSION}
+PATCH_VERSION=${PATCH_VERSION}
+APPLICATION_NAME=${APPLICATION_NAME}
+ENGINE_NAME=${ENGINE_NAME})
+
+message("libs: ${INCLUDES_LIST}")
+message("----------------------")
+message("links: ${LINKS_LIST}")
+target_link_libraries(${APPLICATION_NAME} PUBLIC ${LINKS_LIST})
+target_include_directories(${APPLICATION_NAME} PUBLIC ${INCLUDES_LIST} )
+target_compile_options(${APPLICATION_NAME} PUBLIC ${CFLAGS_LIST})
+
+add_compile_definitions(${PLATAFORM})
